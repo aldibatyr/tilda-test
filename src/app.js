@@ -22,7 +22,8 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  res.send(req).status(200)
+  console.log(req)
+  res.send(req)
 })
 
 app.use(function errorHandler(error, req, res, next) {
