@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
+const bodyParser = require('body-parser')
 
 
 const app = express();
@@ -16,14 +17,20 @@ app.use(morgan(morganOption));
 app.use(cors());
 app.use(helmet());
 
+const jsonParser = bodyParser.json()
 
 app.get('/', (req, res) => {
   res.send('Hello, world!')
 })
 
-app.post('/', (req, res) => {
-  console.log(req)
-  res.send(req)
+app.post('/test', jsonParser, (req, res) => {
+  console.log(req.body)
+  try {
+    const data = JSON.stringify(req.body)
+    res.send(data)
+  } catch (error) {
+    return error
+  }
 })
 
 app.use(function errorHandler(error, req, res, next) {
