@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+    function checkIfWorks() {
+      console.log('changed')
+      addEventToButton()
+    }
+
+    async function sendRequest() {
+      $.ajax({
+        method: 'POST',
+        url: 'https://epay-oauth.homebank.kz/oauth2/token',
+        data: {
+          grant_type: "client_credentials",
+          scope: "payment usermanagement",
+          client_id: "VENOCOMFORT",
+          client_secret: "IdzFM59exWrKHaTD",
+          invoiceID: "000000001",
+          amount: 100,
+          currency: "KZT",
+          terminal: "d30a4392-ffd1-4beb-a5e8-ba7c87843a8a",
+          postLink: "",
+          failurePostLink: "",
+        },
+        dataType: 'json'
+      }).then((response) => {
+        console.log(response)
+      })
+    }
+    function addEventToButton() {
+      const button = document.getElementsByClassName('t-submit')[0]
+      button.onclick = function () {
+        sendRequest()
+      }
+    }
+
+    let ob = new MutationObserver(() => checkIfWorks())
+
+    ob.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class']
+    })
+  </script>
+</body>
+
+</html>
