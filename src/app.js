@@ -18,8 +18,12 @@ app.use(helmet());
 
 
 app.get('/', (req, res) => {
-  
+
   res.send('Hello, world!')
+})
+
+app.post('/', (req, res) => {
+  res.send('Got it')
 })
 
 app.use(function errorHandler(error, req, res, next) {
