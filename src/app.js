@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
   res.send('Hello, world!')
 })
 
-app.post('/test', jsonParser, (req, res) => {
+app.post('/pay', jsonParser, (req, res) => {
   console.log(req.body)
   try {
     const data = JSON.stringify(req.body)
